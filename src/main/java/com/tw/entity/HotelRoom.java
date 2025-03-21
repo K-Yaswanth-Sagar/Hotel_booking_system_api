@@ -1,10 +1,13 @@
 package com.tw.entity;
 
-import jakarta.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,16 +25,12 @@ public class HotelRoom {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "room_number")
 	private Integer roomNo;
-	
-	@Column(name = "room_type")
 	private String type;
-	
-	@Column(name = "price")
 	private double price;
-	
-	@Column(name = "is_booked")
-	private boolean isBooked;
-	
+
+	@ManyToOne
+    @JoinColumn(name = "hotel_id", nullable = false)
+	@JsonIgnore
+    private Hotel hotel;
 }
