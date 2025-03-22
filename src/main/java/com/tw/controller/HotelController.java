@@ -72,6 +72,27 @@ public class HotelController {
 		else
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to delete the room details");
 	}
+	
+	 @PostMapping("/{hotelId}/addAdmin/{adminId}")
+	    public ResponseEntity<?> addAdminToHotel(@PathVariable Long hotelId, @PathVariable Long adminId) {
+	        
+	        boolean status = service.addAdminToHotel(hotelId, adminId);
+			if(status)
+				return ResponseEntity.status(HttpStatus.CREATED).body("Admin added successfully");
+			else
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Couldn't add the admin");
+	        
+	    }
+	 
+	 @DeleteMapping("/{hotelId}/removeAdmin/{adminId}")
+	 public ResponseEntity<?> removeAdminFromHotel(@PathVariable Long hotelId, @PathVariable Long adminId) {
+	        
+		boolean status = service.removeAdminFromHotel(hotelId, adminId);
+		if(status)
+			return ResponseEntity.status(HttpStatus.OK).body("Admin deleted successfully");
+		else
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to delete the admin details");
+	 }
 		
 	
 }

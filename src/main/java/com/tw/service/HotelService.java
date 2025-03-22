@@ -11,5 +11,7 @@ public interface HotelService {
 	List<Hotel> getAllHotels();
 	Hotel getHotelById(Long id);
 	boolean deleteHotel(Long id);
+	boolean addAdminToHotel(Long hotelId, Long adminId);
+	boolean removeAdminFromHotel(Long hotelId, Long adminId);
 	
 }

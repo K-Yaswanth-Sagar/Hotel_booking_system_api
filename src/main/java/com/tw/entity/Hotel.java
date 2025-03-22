@@ -1,6 +1,8 @@
 package com.tw.entity;
 
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -14,6 +16,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 @Data
@@ -32,6 +36,14 @@ public class Hotel {
 	@JsonManagedReference
 	private HotelAddress hotelAddress;
 	
+	
+	  @ManyToMany
+	  @JoinTable(
+	        name = "hotel_admins",
+	        joinColumns = @JoinColumn(name = "hotel_id"),
+	        inverseJoinColumns = @JoinColumn(name = "admin_id")
+	    )
+	    private Set<Admin> admins;
 	 
 
 }
